@@ -48,6 +48,8 @@ export const metaReducers: MetaReducer<any>[] = [clearState];
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature('APP', fromLoginReducer.AppReducer),
     EffectsModule.forRoot(effects),
+
+
   ],
   providers: [
     {
