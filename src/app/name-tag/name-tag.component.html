@@ -1,0 +1,110 @@
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">Over 2 million free high-resolution images brought to you by the world’s most generous community of photographers..</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+                <li><a class="text-white">Follow Twits: clicks@twit.com</a></li>
+                <li><a class="text-white">Like on Fb: clicks@fb.com</a></li>
+                <li><a class="text-white">Email me : clicks@mail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark box-shadow text-white">
+      <div class="container d-flex justify-content-between">
+        <a class="navbar-brand d-flex align-items-center mr-auto p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <strong>Click-Shots</strong>
+        </a>
+        <button class="navbar-toggler p-2" type="button" data-toggle="collapse" data-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <button  class="p-2 btn btn-primary pr-md-2 ml-2" type="button" (click) ="signout()">
+            signout
+          </button>
+      </div>
+    </div>
+  </header>
+  
+  <main role="main">
+  
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Image Gallery</h1>
+        <p class="lead text-muted">You can able to see your favourite PhotoGraphers clicks here by adding their names</p>
+          <mat-form-field class="example-chip-list" appearance="fill">
+            <mat-label>search your favourite`s using '@'</mat-label>
+            <mat-chip-list #chipList>
+              <mat-chip color="primary"
+                *ngFor="let name of names"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(name)">
+                {{name}}
+                <button matChipRemove *ngIf="removable">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input class = "name-input"
+                #nameInput
+                [formControl]="nameCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let name of filteredNames | async" [value]="name">
+                {{name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+      </div>
+    </section>
+  
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row" *ngIf="images$ | async as images1">
+            <div class="col-md-4" *ngFor="let img of images1">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top" src= {{img.path}} alt="ImageNotLoaded">
+                  <div class="card-body">
+                    <p class="card-text">{{img.notes}}</p>
+                    <p class="card-text">pic by: {{img.owner}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" (click) ="download(img.path)">View</a>
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  
+  </main>
+  
+  <footer class="text-muted">
+    <div class="container">
+      <p>All These Images Are Taken By professional PhotoGraphers.If you Are a Premium User You can Download and view all Images</p>
+    </div>
+  </footer>
+
+
+
+

@@ -1,0 +1,70 @@
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Over 2 million free high-resolution images brought to you by the world’s most generous
+            community of photographers..</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-white">Follow Twits: clicks@twit.com</a></li>
+            <li><a class="text-white">Like on Fb: clicks@fb.com</a></li>
+            <li><a class="text-white">Email me : clicks@mail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-light bg-dark">
+    <a class="navbar-brand text-primary" >Welcome To Click-Shots</a>
+    <ul class="nav nav-pills">
+      <li class="nav-item" *ngIf="!showForm">
+        <button type="button" class="btn btn-primary" data-target="#login" (click)="showForm = true">Login</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="navbar-toggler btn btn-link text-primary abt" data-toggle="collapse"
+          data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false">About</button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<body>
+  <div *ngIf="showForm">
+    <div class="p-5 bg-image" style="
+      background-image: url(assets/image8.jpg);
+      height: 400px;">
+      <div>
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="d-flex justify-content-center align-items-center login">
+            <div class="text-white">
+              <div class="form-group row" [formGroup]="loginForm">
+                <div class="col-xs-4 mr-md-3">
+                  <label for="ex1">Email</label>
+                  <input class="form-control" id="ex1" type="text" formControlName="emailId">
+                </div>
+                <div class="col-xs-3 mr-md-3">
+                  <label for="ex2">Password</label>
+                  <input class="form-control" id="ex2" type="text" formControlName="password">
+                </div>
+                <div class="col-xs-2 mr-md-3 form-btn">
+                  <label for="ex2"></label>
+                  <button type="submit" class="btn btn-primary" (click)="submit()">Login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <carousel [height]="569" [width]="1366" [autoplay]="true" [loop]="true" [autoplayInterval]="2000" [cellsToShow]="1"
+      [cellWidth]="50" [images]="images" [lightDOM]="true" [pauseOnHover] = "false">
+    </carousel>
+  </div>
+
+</body>
